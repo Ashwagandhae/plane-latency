@@ -56,6 +56,13 @@
 </script>
 
 <div class="top">
+	<div class="contentScroll">
+		<div class="content">
+			{#each filteredActivities as [activity, index]}
+				<slot name="activity" {index} {activity}></slot>
+			{/each}
+		</div>
+	</div>
 	<SideScroll>
 		<div class="bar">
 			<div class="searches">
@@ -84,13 +91,6 @@
 			<slot name="buttons"></slot>
 		</div>
 	</SideScroll>
-	<div class="contentScroll">
-		<div class="content">
-			{#each filteredActivities as [activity, index]}
-				<slot name="activity" {index} {activity}></slot>
-			{/each}
-		</div>
-	</div>
 </div>
 
 <style>
@@ -107,7 +107,7 @@
 	.top {
 		height: 100%;
 		display: grid;
-		grid-template-rows: calc(1rem + var(--pad) * 2) 1fr;
+		grid-template-rows: 1fr calc(1rem + var(--pad) * 2);
 		gap: var(--pad);
 	}
 	.searches {

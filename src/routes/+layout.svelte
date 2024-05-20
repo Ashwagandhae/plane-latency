@@ -41,18 +41,10 @@
 			localStorage.setItem('state', JSON.stringify($state));
 		}
 	}
-	const tabs = ['mchallenges', 'challenges', 'curses', 'transport'];
+	const tabs = ['rules', 'mchallenges', 'challenges', 'curses', 'transport'];
 </script>
 
 <main>
-	<SideScroll>
-		<div class="tabs">
-			{#each tabs as tab}
-				<Button link="./{tab}" layer={0} selected={$page.url.pathname == `/${tab}`}>{tab}</Button>
-			{/each}
-		</div>
-	</SideScroll>
-	<div class="main"><slot></slot></div>
 	<SideScroll>
 		<div class="bar">
 			{#if $state != null}
@@ -62,6 +54,14 @@
 					<Button on:click={toggleTheme}><Icon name="rainbow" /></Button>
 				</div>
 			{/if}
+		</div>
+	</SideScroll>
+	<div class="main"><slot></slot></div>
+	<SideScroll>
+		<div class="tabs">
+			{#each tabs as tab}
+				<Button link="./{tab}" layer={0} selected={$page.url.pathname == `/${tab}`}>{tab}</Button>
+			{/each}
 		</div>
 	</SideScroll>
 </main>
