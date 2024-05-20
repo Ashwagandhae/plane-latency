@@ -69,6 +69,8 @@
 	main {
 		width: 100vw;
 		height: 100vh;
+		width: 100dvw;
+		height: 100dvh;
 		padding: var(--pad);
 		background-color: var(--back-0);
 		box-sizing: border-box;
