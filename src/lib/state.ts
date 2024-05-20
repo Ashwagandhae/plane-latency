@@ -7,12 +7,13 @@ export const state: Writable<State | null> = writable(null);
 
 export type State = {
 	points: number;
-	challenges: ChallengeState[];
-	mandatoryChallenges: ChallengeState[];
-};
-
-export type ChallengeState = {
-	complete: boolean;
+	challenges: {
+		complete: boolean;
+		equipped: boolean;
+	}[];
+	mandatoryChallenges: {
+		complete: boolean;
+	}[];
 };
 
 state.subscribe((value) => {
@@ -24,7 +25,7 @@ state.subscribe((value) => {
 export function initState(): State {
 	return {
 		points: 0,
-		challenges: challenges.map(() => ({ complete: false })),
+		challenges: challenges.map(() => ({ complete: false, equipped: false })),
 		mandatoryChallenges: mandatoryChallenges.map(() => ({ complete: false }))
 	};
 }
@@ -33,6 +34,7 @@ export function completeChallenge(index: number): void {
 	state.update((value) => {
 		if (value == null) return value;
 		value.challenges[index].complete = true;
+		value.challenges[index].equipped = false;
 		const points = challenges[index].points;
 		if (points.tag === 'number') {
 			value.points += points.amount;
@@ -45,12 +47,29 @@ export function uncompleteChallenge(index: number): void {
 	state.update((value) => {
 		if (value == null) return value;
 		value.challenges[index].complete = false;
+		value.challenges[index].equipped = false;
 		const points = challenges[index].points;
 		if (points.tag === 'number') {
 			if (confirm('Also remove points?')) {
 				value.points -= points.amount;
 			}
 		}
+		return value;
+	});
+}
+
+export function equipChallenge(index: number): void {
+	state.update((value) => {
+		if (value == null) return value;
+		value.challenges[index].equipped = true;
+		return value;
+	});
+}
+
+export function unequipChallenge(index: number): void {
+	state.update((value) => {
+		if (value == null) return value;
+		value.challenges[index].equipped = false;
 		return value;
 	});
 }

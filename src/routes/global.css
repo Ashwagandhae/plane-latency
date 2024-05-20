@@ -78,9 +78,13 @@ body {
 }
 .palette-green {
 	--hue: 120;
-	--saturation: 40%;
+	--saturation: 60%;
 }
 .palette-orange {
 	--hue: 30;
-	--saturation: 40%;
+	--saturation: 60%;
+}
+.palette-blue {
+	--hue: 210;
+	--saturation: 60%;
 }

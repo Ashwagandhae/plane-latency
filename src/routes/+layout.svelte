@@ -4,7 +4,7 @@
 	import { initState, state } from '$lib/state';
 
 	import './global.css';
-	import MutNumber from './MutNumber.svelte';
+	import Points from './Points.svelte';
 	import Button from './Button.svelte';
 	import { page } from '$app/stores';
 	import { dev } from '$app/environment';
@@ -58,15 +58,17 @@
 		</div>
 	</SideScroll>
 	<div class="main"><slot></slot></div>
-	<div class="bar">
-		{#if $state != null}
-			<Card><MutNumber bind:val={$state.points} label="points"></MutNumber></Card>
-			<div class="buttons">
-				<Button on:click={reset}><Icon name="arrowRoundLeft"></Icon></Button>
-				<Button on:click={toggleTheme}>theme</Button>
-			</div>
-		{/if}
-	</div>
+	<SideScroll>
+		<div class="bar">
+			{#if $state != null}
+				<Points bind:val={$state.points}></Points>
+				<div class="buttons">
+					<Button on:click={reset}><Icon name="arrowRoundLeft"></Icon></Button>
+					<Button on:click={toggleTheme}><Icon name="rainbow" /></Button>
+				</div>
+			{/if}
+		</div>
+	</SideScroll>
 </main>
 
 <style>

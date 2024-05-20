@@ -240,6 +240,30 @@
 			svg: `<circle cx="46.5" cy="46.5" r="35.5" stroke-width="10"/>
 <path d="M72 73L80.5 81.5L89 90" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
 <path fill-rule="evenodd" clip-rule="evenodd" d="M42 61C42 63.7614 44.2386 66 47 66C49.7614 66 52 63.7614 52 61V51H62C64.7614 51 67 48.7614 67 46C67 43.2386 64.7614 41 62 41H52V31C52 28.2386 49.7614 26 47 26C44.2386 26 42 28.2386 42 31V41H32C29.2386 41 27 43.2386 27 46C27 48.7614 29.2386 51 32 51H42V61Z" fill="currentColor"/>`
+		},
+		{
+			name: 'upDownArrow',
+			svg: `<path d="M5 28L26 5L47 28" stroke="currentColor" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M26 7L26 85" stroke="currentColor" stroke-width="10" stroke-linecap="round"/>
+<path d="M95 72L74 95L53 72" stroke="currentColor" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M74.0001 93L74 15" stroke="currentColor" stroke-width="10" stroke-linecap="round"/>`
+		},
+		{
+			name: 'equals',
+			svg: `
+		<line x1="10" y1="30" x2="90" y2="30" stroke="currentColor" stroke-width="10" stroke-linecap="round"/>
+<line x1="10" y1="70" x2="90" y2="70" stroke="currentColor" stroke-width="10" stroke-linecap="round"/>`
+		},
+		{
+			name: 'rainbow',
+			svg: `<path d="M28 68C28 36 70 36 70 68" stroke-width="10" stroke-linecap="round"/>
+<path d="M8 68C8 9.33333 92 9.33333 92 68" stroke-width="10" stroke-linecap="round"/>`
+		},
+		{
+			name: 'funnel',
+			svg: `<line x1="25" y1="50" x2="75" y2="50" stroke-width="10" stroke-linecap="round"/>
+<line x1="40" y1="79" x2="60" y2="79" stroke-width="10" stroke-linecap="round"/>
+<line x1="10" y1="20" x2="90" y2="20" stroke-width="10" stroke-linecap="round"/>`
 		}
 	];
 	let displayIcon: { name: string; svg: string } | null;

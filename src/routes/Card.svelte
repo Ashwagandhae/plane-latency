@@ -1,8 +1,11 @@
 <script lang="ts">
+	import { paletteClass, type Palette } from '$lib/style';
+
 	export let selected: boolean = false;
+	export let palette: Palette = 'plain';
 </script>
 
-<div class:selected>
+<div class:selected class={paletteClass(palette)}>
 	<slot></slot>
 </div>
 
