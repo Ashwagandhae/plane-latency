@@ -67,8 +67,8 @@
 	}
 	.top {
 		height: 100%;
-		display: flex;
-		flex-direction: column;
+		display: grid;
+		grid-template-rows: calc(1rem + var(--pad) * 2) 1fr;
 		gap: var(--pad);
 	}
 	.searches {
