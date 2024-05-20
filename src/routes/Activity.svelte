@@ -16,11 +16,11 @@
 
 	$: selected, selectedChange();
 
-	let el: HTMLDivElement;
+	let el: HTMLDivElement | null = null;
 
 	function selectedChange() {
 		if (selected) {
-			el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+			el?.scrollIntoView({ behavior: 'smooth', block: 'center' });
 		}
 	}
 </script>

@@ -24,3 +24,8 @@ export type Points =
 			tag: 'special';
 			description: string;
 	  };
+
+export type Activity = {
+	title: string;
+	description: string;
+};

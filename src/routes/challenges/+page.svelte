@@ -5,10 +5,13 @@
 	import Activity from '../Activity.svelte';
 	import Icon from '../Icon.svelte';
 	import ActivityView from '../ActivityView.svelte';
+	import { tick } from 'svelte';
 
 	let selectedIndex: null | number = null;
 
-	function randomChallenge() {
+	let clearSearch: () => void;
+
+	async function randomChallenge() {
 		if ($state == null) return;
 		let challenges = $state.challenges;
 		let nonCompletedCount = challenges.filter((challenge) => !challenge.complete).length;
@@ -16,6 +19,8 @@
 			alert('All challenges are completed!');
 			return;
 		}
+		clearSearch();
+		await tick();
 		let randomIndex = Math.floor(Math.random() * nonCompletedCount);
 		let i = 0;
 		for (let j = 0; j < challenges.length; j++) {
@@ -30,35 +35,22 @@
 	}
 </script>
 
-<div class="top">
-	<div class="bar">
-		<Button on:click={randomChallenge}><Icon name="dots"></Icon>random</Button>
-	</div>
-	<ActivityView>
-		{#each challenges as challenge, index}
-			<Activity
-				title={challenge.title}
-				description={challenge.description}
-				points={challenge.points}
-				{index}
-				selected={selectedIndex === index}
-				complete={$state?.challenges[index].complete ?? false}
-				completeActivity={() => {
-					completeChallenge(index);
-				}}
-				uncompleteActivity={() => {
-					uncompleteChallenge(index);
-				}}
-			/>
-		{/each}
-	</ActivityView>
-</div>
-
-<style>
-	.top {
-		height: 100%;
-		display: flex;
-		flex-direction: column;
-		gap: var(--pad);
-	}
-</style>
+<ActivityView activities={challenges} bind:clearSearch>
+	<Button slot="buttons" on:click={randomChallenge}><Icon name="dots"></Icon>random</Button>
+	<Activity
+		let:index
+		slot="activity"
+		title={challenges[index].title}
+		description={challenges[index].description}
+		points={challenges[index].points}
+		{index}
+		selected={selectedIndex === index}
+		complete={$state?.challenges[index].complete ?? false}
+		completeActivity={() => {
+			completeChallenge(index);
+		}}
+		uncompleteActivity={() => {
+			uncompleteChallenge(index);
+		}}
+	/>
+</ActivityView>

@@ -5,28 +5,17 @@
 	import ActivityView from '../ActivityView.svelte';
 </script>
 
-<div class="top">
-	<ActivityView>
-		{#each mandatoryChallenges as challenge, index}
-			<Activity
-				title={challenge.title}
-				description={challenge.description}
-				points={null}
-				{index}
-				selected={false}
-				complete={$state?.mandatoryChallenges[index].complete ?? false}
-				completeActivity={() => completeMandatoryChallenge(index)}
-				uncompleteActivity={() => uncompleteMandatoryChallenge(index)}
-			/>
-		{/each}
-	</ActivityView>
-</div>
-
-<style>
-	.top {
-		height: 100%;
-		display: flex;
-		flex-direction: column;
-		gap: var(--pad);
-	}
-</style>
+<ActivityView activities={mandatoryChallenges}>
+	<Activity
+		let:index
+		slot="activity"
+		title={mandatoryChallenges[index].title}
+		description={mandatoryChallenges[index].description}
+		points={null}
+		{index}
+		selected={false}
+		complete={$state?.mandatoryChallenges[index].complete ?? false}
+		completeActivity={() => completeMandatoryChallenge(index)}
+		uncompleteActivity={() => uncompleteMandatoryChallenge(index)}
+	/>
+</ActivityView>

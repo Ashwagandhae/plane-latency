@@ -8,6 +8,8 @@
 	import Button from './Button.svelte';
 	import { page } from '$app/stores';
 	import { dev } from '$app/environment';
+	import Icon from './Icon.svelte';
+	import SideScroll from './SideScroll.svelte';
 
 	onMount(() => {
 		const theme = localStorage.getItem('theme');
@@ -48,17 +50,19 @@
 </script>
 
 <main>
-	<div class="tabs">
-		{#each tabs as tab}
-			<Button link="./{tab}" layer={0} selected={$page.url.pathname == `/${tab}`}>{tab}</Button>
-		{/each}
-	</div>
+	<SideScroll>
+		<div class="tabs">
+			{#each tabs as tab}
+				<Button link="./{tab}" layer={0} selected={$page.url.pathname == `/${tab}`}>{tab}</Button>
+			{/each}
+		</div>
+	</SideScroll>
 	<div class="main"><slot></slot></div>
 	<div class="bar">
 		{#if $state != null}
 			<Card><MutNumber bind:val={$state.points} label="points"></MutNumber></Card>
 			<div class="buttons">
-				<Button on:click={reset}>reset</Button>
+				<Button on:click={reset}><Icon name="arrowRoundLeft"></Icon></Button>
 				<Button on:click={toggleTheme}>theme</Button>
 			</div>
 		{/if}
@@ -75,12 +79,12 @@
 		background-color: var(--back-0);
 		box-sizing: border-box;
 
-		display: flex;
-		flex-direction: column;
+		display: grid;
+		grid-template-rows: calc(1rem + var(--pad) * 2) 1fr calc(1rem + var(--pad) * 2);
 		gap: var(--pad);
 	}
 	.main {
-		height: 100%;
+		/* height: 100%; */
 		overflow: scroll;
 	}
 	.bar {
@@ -97,5 +101,7 @@
 		display: flex;
 		gap: var(--pad);
 		flex-direction: row;
+		height: calc(var(--pad) * 2 + 1rem);
+		box-sizing: border-box;
 	}
 </style>

@@ -222,6 +222,24 @@
 			<path d="M2 50H32" stroke="currentColor" stroke-width="10" stroke-linecap="round"/>
 			<circle cx="21" cy="21" r="21" transform="matrix(-1 0 0 1 88 16)" stroke="currentColor" stroke-width="10"/>
 			<path d="M100 83C100 49.6667 36 49.6667 36 83" stroke="currentColor" stroke-width="10" stroke-linecap="round"/>`
+		},
+		{
+			name: 'magnifyGlass',
+			svg: `
+<circle cx="46.5" cy="46.5" r="35.5" stroke-width="10"/>
+<path d="M72 73L80.5 81.5L89 90" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>`
+		},
+		{
+			name: 'magnifyGlassMinus',
+			svg: `<circle cx="46.5" cy="46.5" r="35.5" stroke-width="10"/>
+<path d="M72 73L80.5 81.5L89 90" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M32 46H62" stroke-width="10" stroke-linecap="round"/>`
+		},
+		{
+			name: 'magnifyGlassPlus',
+			svg: `<circle cx="46.5" cy="46.5" r="35.5" stroke-width="10"/>
+<path d="M72 73L80.5 81.5L89 90" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M42 61C42 63.7614 44.2386 66 47 66C49.7614 66 52 63.7614 52 61V51H62C64.7614 51 67 48.7614 67 46C67 43.2386 64.7614 41 62 41H52V31C52 28.2386 49.7614 26 47 26C44.2386 26 42 28.2386 42 31V41H32C29.2386 41 27 43.2386 27 46C27 48.7614 29.2386 51 32 51H42V61Z" fill="currentColor"/>`
 		}
 	];
 	let displayIcon: { name: string; svg: string } | null;

@@ -5,29 +5,18 @@
 	import ActivityView from '../ActivityView.svelte';
 </script>
 
-<div class="top">
-	<ActivityView>
-		{#each curses as curse, index}
-			<Activity
-				title={curse.title}
-				description={curse.description}
-				points={{ tag: 'number', amount: -1 * curse.cost }}
-				{index}
-				selected={false}
-				complete={false}
-				completeActivity={() => {
-					buyCurse(index);
-				}}
-			/>
-		{/each}
-	</ActivityView>
-</div>
-
-<style>
-	.top {
-		height: 100%;
-		display: flex;
-		flex-direction: column;
-		gap: var(--pad);
-	}
-</style>
+<ActivityView activities={curses}>
+	<Activity
+		let:index
+		slot="activity"
+		title={curses[index].title}
+		description={curses[index].description}
+		points={{ tag: 'number', amount: -1 * curses[index].cost }}
+		{index}
+		selected={false}
+		complete={false}
+		completeActivity={() => {
+			buyCurse(index);
+		}}
+	/>
+</ActivityView>
