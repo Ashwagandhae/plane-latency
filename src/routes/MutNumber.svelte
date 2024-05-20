@@ -20,5 +20,6 @@
 		width: 8ch;
 		text-align: right;
 		padding: 0;
+		font-size: inherit;
 	}
 </style>

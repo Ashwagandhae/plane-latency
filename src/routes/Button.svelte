@@ -6,10 +6,11 @@
 	export let selected: boolean = false;
 	export let layer: Layer = 1;
 	export let palette: Palette = 'plain';
+	export let disabled: boolean = false;
 </script>
 
 <Link {link}>
-	<button class:selected class="{layerClass(layer)} {paletteClass(palette)}" on:click>
+	<button class:selected class="{layerClass(layer)} {paletteClass(palette)}" on:click {disabled}>
 		<slot></slot>
 	</button>
 </Link>
@@ -40,5 +41,9 @@
 	button:active,
 	button.selected {
 		background-color: var(--l-back-active);
+	}
+	button:disabled {
+		background-color: var(--l-back);
+		color: var(--text-weak);
 	}
 </style>

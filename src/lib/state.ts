@@ -84,3 +84,16 @@ export function buyCurse(index: number): void {
 		return value;
 	});
 }
+
+export function payTransportCost(cost: number): void {
+	state.update((value) => {
+		if (value == null) return value;
+		if (value.points < cost) {
+			alert('Not enough points!');
+			return value;
+		}
+		if (!confirm(`This transport will cost ${cost} pts. Are you sure?`)) return value;
+		value.points -= cost;
+		return value;
+	});
+}

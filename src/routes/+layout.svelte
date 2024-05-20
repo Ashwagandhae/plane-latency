@@ -46,7 +46,7 @@
 			localStorage.setItem('state', JSON.stringify($state));
 		}
 	}
-	const tabs = ['mchallenges', 'challenges', 'curses'];
+	const tabs = ['mchallenges', 'challenges', 'curses', 'transport'];
 </script>
 
 <main>

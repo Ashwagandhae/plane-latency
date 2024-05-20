@@ -65,6 +65,7 @@
 <style>
 	h2 {
 		margin: 0;
+		font-size: 1.5rem;
 	}
 	p {
 		margin: 0;
