@@ -13,6 +13,7 @@
 	function addPoints() {
 		if ($state == null) return;
 		$state.points += add;
+		add = 0;
 	}
 </script>
 

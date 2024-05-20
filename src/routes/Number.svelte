@@ -8,7 +8,7 @@
 	let inputEl: HTMLInputElement | null = null;
 </script>
 
-<div class="top" class:focus>
+<div class="top" class:focus class:unit={unit != ''}>
 	{#if focus}
 		<input
 			bind:this={inputEl}
@@ -73,8 +73,10 @@
 	}
 
 	.top.focus {
-		padding-right: var(--pad);
 		white-space: nowrap;
 		height: calc(1rem + var(--pad) * 2);
+	}
+	.top.focus.unit {
+		padding-right: var(--pad);
 	}
 </style>

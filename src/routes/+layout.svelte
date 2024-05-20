@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Card from './Card.svelte';
 	import { onMount } from 'svelte';
-	import { initState, state } from '$lib/state';
+	import { initFromStored, initState, state } from '$lib/state';
 
 	import './global.css';
 	import Points from './Points.svelte';
@@ -22,12 +22,7 @@
 				document.documentElement.classList.add('dark');
 			}
 		}
-		const stored = localStorage.getItem('state');
-		if (stored) {
-			$state = JSON.parse(stored);
-		} else {
-			$state = initState();
-		}
+		$state = initFromStored();
 	});
 
 	function toggleTheme() {

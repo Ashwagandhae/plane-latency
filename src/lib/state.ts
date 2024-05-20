@@ -5,6 +5,13 @@ import { curses } from './data/curse';
 
 export const state: Writable<State | null> = writable(null);
 
+export type ChallengeState = {
+	complete: boolean;
+	equipped: boolean;
+};
+export type MandatoryChallengeState = {
+	complete: boolean;
+};
 export type State = {
 	points: number;
 	challenges: {
@@ -28,6 +35,35 @@ export function initState(): State {
 		challenges: challenges.map(() => ({ complete: false, equipped: false })),
 		mandatoryChallenges: mandatoryChallenges.map(() => ({ complete: false }))
 	};
+}
+
+export function initFromStored(): State {
+	const stored = localStorage.getItem('state');
+	if (stored == null) {
+		return initState();
+	} else {
+		let state: State;
+		try {
+			state = JSON.parse(stored);
+		} catch (e) {
+			console.error(e);
+			return initState();
+		}
+		normalizeList(state.challenges, challenges, { complete: false, equipped: false });
+		normalizeList(state.mandatoryChallenges, mandatoryChallenges, { complete: false });
+		return state;
+	}
+}
+
+function normalizeList<T, U>(stateList: T[], constList: U[], initEl: T): void {
+	if (stateList.length !== constList.length) {
+		// if list is longer than constList, truncate it
+		stateList.splice(constList.length);
+		// if list is shorter than constList, extend it
+		for (let i = stateList.length; i < constList.length; i++) {
+			stateList.push(structuredClone(initEl));
+		}
+	}
 }
 
 export function completeChallenge(index: number): void {
