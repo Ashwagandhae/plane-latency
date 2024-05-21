@@ -19,7 +19,7 @@
 
 <div class="bar">
 	<div class="wrap">
-		<Number bind:val unit="pts"></Number>
+		<Number bind:val unit="c"></Number>
 	</div>
 	<Icon name="plus"></Icon>
 	<div class="wrap palette-{addPalette}">

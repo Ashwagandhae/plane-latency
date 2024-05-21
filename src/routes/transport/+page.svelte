@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { transports } from '$lib/data/transport';
+	import { transports } from '$lib/data/out';
 	import { payTransportCost, state } from '$lib/state';
 	import Button from '../Button.svelte';
 	import Icon from '../Icon.svelte';
@@ -53,7 +53,7 @@
 				bind:value={inString}
 				placeholder={direction == 'distanceToPoints' ? 'distance' : 'amount'}
 			/>
-			{direction == 'distanceToPoints' ? 'miles' : 'pts'}
+			{direction == 'distanceToPoints' ? 'miles' : 'c'}
 		</div>
 		<Button
 			on:click={() => {
@@ -74,7 +74,7 @@
 	</div>
 	<div class="out">
 		{out == null ? 'unknown' : Math.round(out * 1000) / 1000}
-		{direction == 'distanceToPoints' ? 'pts' : 'miles'}
+		{direction == 'distanceToPoints' ? 'c' : 'miles'}
 	</div>
 	<Button palette="orange" on:click={pay}>pay</Button>
 </div>

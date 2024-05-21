@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { challenges } from '$lib/data/challenge';
+	import { challenges } from '$lib/data/out';
 	import {
 		completeChallenge,
 		equipChallenge,

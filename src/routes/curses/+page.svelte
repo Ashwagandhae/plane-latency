@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { curses } from '$lib/data/curse';
+	import { curses } from '$lib/data/out';
 	import { buyCurse } from '$lib/state';
 	import Activity from '../Activity.svelte';
 	import ActivityView from '../ActivityView.svelte';

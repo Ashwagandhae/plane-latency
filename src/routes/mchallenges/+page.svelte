@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { mandatoryChallenges } from '$lib/data/mandatoryChallenge';
+	import { mandatoryChallenges } from '$lib/data/out';
 	import { completeMandatoryChallenge, state, uncompleteMandatoryChallenge } from '$lib/state';
 	import Activity from '../Activity.svelte';
 	import ActivityView from '../ActivityView.svelte';

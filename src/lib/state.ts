@@ -1,7 +1,5 @@
 import { type Writable, writable } from 'svelte/store';
-import { challenges } from './data/challenge';
-import { mandatoryChallenges } from './data/mandatoryChallenge';
-import { curses } from './data/curse';
+import { challenges, mandatoryChallenges, curses } from './data/out';
 
 export const state: Writable<State | null> = writable(null);
 
@@ -134,7 +132,7 @@ export function buyCurse(index: number): void {
 			alert('Not enough points!');
 			return value;
 		}
-		if (!confirm(`This curse will cost ${curse.cost} pts. Are you sure?`)) return value;
+		if (!confirm(`This curse will cost ${curse.cost} c. Are you sure?`)) return value;
 		value.points -= curse.cost;
 		return value;
 	});
@@ -147,7 +145,7 @@ export function payTransportCost(cost: number): void {
 			alert('Not enough points!');
 			return value;
 		}
-		if (!confirm(`This transport will cost ${cost} pts. Are you sure?`)) return value;
+		if (!confirm(`This transport will cost ${cost} c. Are you sure?`)) return value;
 		value.points -= cost;
 		return value;
 	});
