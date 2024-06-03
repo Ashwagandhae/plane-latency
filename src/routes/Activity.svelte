@@ -107,13 +107,14 @@
 	.title {
 		display: flex;
 		gap: var(--pad);
+		flex-direction: row;
 		align-items: center;
 	}
 	.points {
 		display: flex;
 		gap: var(--pad);
+		flex-direction: row;
 		align-items: center;
-		/* prevent line break */
 	}
 	.title h2 {
 		color: var(--text-strong);
