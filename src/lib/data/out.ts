@@ -10,8 +10,8 @@ export const mandatoryChallenges: MandatoryChallenge[] =
 export const curses: Curse[] =
 [{"title":"no phone :(","description":"You cannot use phone for 20 minutes. (applies just to target team)","cost":400},{"title":"compulsory bus tour","description":"Get on the nearest bus that comes to the nearest stop to you (you cannot check where it goes). (applies just to target team)","cost":300},{"title":"giving elementary school","description":"For 10 minutes, you cannot step on crack in sidewalk. If you fail, you must stand still for 10 minutes. (applies just to target team)","cost":100},{"title":"tragic loss of important symbol","description":"For 30 minutes you can't use the letter e. Anytime you do, you must stand still for 10 minutes. (applies just to target team)","cost":200},{"title":"no pubic transport","description":"For 15 min, you cannot take any form of public transportation. (applies just to target team)","cost":300},{"title":"sing dld theme","description":"Both of you must record yourself humming/singing/vocalizing or whatever the Don't Look Down theme for 5 minutes. (applies just to target team)","cost":300},{"title":"curse of orin the swim coach","description":"You can't talk to your teammate until you complete your next challenge (no texting either), starting two minutes from now. If you fail, you must stand in silence for 5 minutes and you can continuously fail. (applies just to target team)","cost":300},{"title":"alea iacta sunt","description":"While doing your next challenge, roll a dice (or use random number between 1 and 6). Multiply the number you get by 0.1 miles, and that is the radius you must stay in for the next 10 min. (applies just to target team)","cost":300},{"title":"on the lookout","description":"For the next 15 min, if the team who activated the curse takes a full body photo of you from less than 300 ft away, you cannot move for the next 10 min. (Obviously use your judgement here if you're in the middle of a crosswalk don't stop there) (applies to all teams except the team which purchased the curse)","cost":300}]
 export const transports: { [key: string]: number } = {
-	BART: 250,
-	muni: 300,
-	bus: 350,
-	walk: 400,
+	BART: 150,
+	muni: 200,
+	bus: 250,
+	walk: 300,
 };

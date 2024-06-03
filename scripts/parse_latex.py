@@ -242,10 +242,10 @@ out_str += orjson.dumps(curses).decode()
 
 out_str += """
 export const transports: { [key: string]: number } = {
-	BART: 250,
-	muni: 300,
-	bus: 350,
-	walk: 400,
+	BART: 150,
+	muni: 200,
+	bus: 250,
+	walk: 300,
 };
 """
 
