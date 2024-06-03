@@ -5,7 +5,7 @@
 <article>
 	<ul>
 		{#each rules as rule}
-			<li>{rule}</li>
+			<li>{@html rule}</li>
 		{/each}
 	</ul>
 </article>

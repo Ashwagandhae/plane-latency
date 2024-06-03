@@ -66,7 +66,7 @@
 						>
 					{/if}
 				{:else if equipped == false}
-					<p>
+					<p class:nobreak={points?.tag == 'number'}>
 						{#if points?.tag === 'number'}
 							{points.amount >= 0 ? '+' : '-'}{Math.abs(points.amount)}
 						{:else if points?.tag === 'special'}
@@ -113,9 +113,13 @@
 		display: flex;
 		gap: var(--pad);
 		align-items: center;
+		/* prevent line break */
 	}
 	.title h2 {
 		color: var(--text-strong);
+	}
+	p.nobreak {
+		white-space: nowrap;
 	}
 	.complete h2,
 	.complete .number,
