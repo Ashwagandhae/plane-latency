@@ -48,7 +48,6 @@
 		<div class="in">
 			<input
 				type="text"
-				inputmode="numeric"
 				pattern="([0-9]|.)*"
 				bind:value={inString}
 				placeholder={direction == 'distanceToPoints' ? 'distance' : 'amount'}

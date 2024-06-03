@@ -7,6 +7,12 @@ export type Challenge = {
 export type MandatoryChallenge = {
 	title: string;
 	description: string;
+	points?: Points;
+};
+export type DistrictChallenge = {
+	points: Points;
+	title: string;
+	description: string;
 };
 
 export type Curse = {

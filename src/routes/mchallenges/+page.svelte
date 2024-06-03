@@ -11,7 +11,7 @@
 		slot="activity"
 		title={mandatoryChallenges[index].title}
 		description={mandatoryChallenges[index].description}
-		points={null}
+		points={mandatoryChallenges[index].points ?? null}
 		{index}
 		selected={false}
 		complete={$state?.mandatoryChallenges[index].complete ?? false}

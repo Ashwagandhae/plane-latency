@@ -79,7 +79,7 @@
 				{/if}
 			</span>
 		</div>
-		<p>{description}</p>
+		<p>{@html description}</p>
 	</div>
 </Card>
 
@@ -90,6 +90,8 @@
 	}
 	p {
 		margin: 0;
+		/* break long urls */
+		word-break: break-word;
 	}
 	.topbar {
 		display: flex;

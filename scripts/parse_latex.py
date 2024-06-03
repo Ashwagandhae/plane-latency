@@ -1,11 +1,7 @@
 from pylatexenc.latexwalker import (
     LatexWalker,
     LatexEnvironmentNode,
-    LatexCharsNode,
     LatexMacroNode,
-    LatexGroupNode,
-    LatexSpecialsNode,
-    LatexNode,
 )
 from pylatexenc.latex2text import LatexNodes2Text
 
@@ -18,6 +14,13 @@ with open("./input.tex") as f:
     walker = LatexWalker(f.read())
 
 to_text = LatexNodes2Text()
+
+
+def nodes_to_text(nodes: list) -> str:
+    s = to_text.nodelist_to_text(nodes)
+    s = s.replace("<", '<a href="')
+    s = s.replace(">", '">link</a>')
+    return s
 
 
 def split_into_sections(walker: LatexWalker) -> dict[str, list]:
@@ -83,7 +86,7 @@ def parse_rules(nodes: list) -> list[str]:
     items = split_into_items(itemize.nodelist)
     ret = []
     for item in items:
-        ret.append(to_text.nodelist_to_text(item).strip())
+        ret.append(nodes_to_text(item).strip())
     return ret
 
 
@@ -103,10 +106,10 @@ def parse_title_and_deescription(
         title_node = next(
             x for x in it if isinstance(x, LatexMacroNode) and x.macroname == "textbf"
         )
-        title = to_text.node_to_text(title_node)
+        title = nodes_to_text([title_node])
         description = ""
         for node in it:
-            description += to_text.node_to_text(node)
+            description += nodes_to_text([node])
         ret.append((title.lower(), description.strip()))
 
     return ret
@@ -120,17 +123,21 @@ def parse_title_and_description_and_points(
     for item in items:
         it = iter(item)
         title_node = next(
-            x for x in it if isinstance(x, LatexMacroNode) and x.macroname == "textbf"
+            (
+                x
+                for x in it
+                if isinstance(x, LatexMacroNode) and x.macroname == "textbf"
+            ),
         )
-        title = to_text.node_to_text(title_node)
+        title = nodes_to_text([title_node])
         description = ""
         points_node = None
         for node in it:
             if isinstance(node, LatexMacroNode) and node.macroname == "textbf":
                 points_node = node
                 break
-            description += to_text.node_to_text(node)
-        points = to_text.node_to_text(points_node)
+            description += nodes_to_text([node])
+        points = nodes_to_text([points_node])
         ret.append((title.lower(), description.strip(), points))
     return ret
 
@@ -205,9 +212,8 @@ def parse_curses(nodes: list) -> list[Curse]:
 sections = split_into_sections(walker)
 
 rules = parse_rules(sections["rules"])
-mandatory_challenges = parse_mandatory_challenges(sections["mandatory challenges"])
-checkpoints = parse_checkpoints(sections["checkpoints"])
-challenges = parse_challenges(sections["location-independent challenges"])
+mandatory_challenges = parse_challenges(sections["district specific challenges"])
+challenges = parse_challenges(sections["challenges"])
 curses = parse_curses(sections["curses"])
 
 
@@ -226,7 +232,7 @@ out_str += orjson.dumps(challenges).decode()
 out_str += """
 export const mandatoryChallenges: MandatoryChallenge[] =
 """
-out_str += orjson.dumps(checkpoints + mandatory_challenges).decode()
+out_str += orjson.dumps(mandatory_challenges).decode()
 
 out_str += """
 export const curses: Curse[] =

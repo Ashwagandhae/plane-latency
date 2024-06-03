@@ -13,7 +13,6 @@
 		<input
 			bind:this={inputEl}
 			type="text"
-			inputmode="numeric"
 			pattern="([0-9]|.|-)*"
 			bind:value={valString}
 			on:change={() => {

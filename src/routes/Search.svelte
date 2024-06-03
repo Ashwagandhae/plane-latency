@@ -28,14 +28,7 @@
 	{#if type == 'text'}
 		<input type="text" bind:value={val} {placeholder} bind:this={inputEl} />
 	{:else}
-		<input
-			type="text"
-			inputmode="numeric"
-			pattern="[0-9]*"
-			bind:value={val}
-			{placeholder}
-			bind:this={inputEl}
-		/>
+		<input type="text" pattern="[0-9]*" bind:value={val} {placeholder} bind:this={inputEl} />
 	{/if}
 </div>
 
