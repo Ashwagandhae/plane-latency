@@ -7,7 +7,11 @@ from pylatexenc.latex2text import LatexNodes2Text
 
 import orjson
 
+import re
+
 from dataclasses import dataclass
+from typing import Any
+
 
 walker = None
 with open("./input.tex") as f:
@@ -209,45 +213,51 @@ def parse_curses(nodes: list) -> list[Curse]:
     ]
 
 
-sections = split_into_sections(walker)
-
-rules = parse_rules(sections["rules"])
-mandatory_challenges = parse_challenges(sections["district specific challenges"])
-challenges = parse_challenges(sections["challenges"])
-curses = parse_curses(sections["curses"])
-
-
-out_str = """
-import type { Challenge, Curse, MandatoryChallenge } from '$lib/challenge';
-"""
-out_str += """
-export const rules: string[] = 
-"""
-out_str += orjson.dumps(rules).decode()
-out_str += """
-export const challenges: Challenge[] = 
-"""
-out_str += orjson.dumps(challenges).decode()
-
-out_str += """
-export const mandatoryChallenges: MandatoryChallenge[] =
-"""
-out_str += orjson.dumps(mandatory_challenges).decode()
-
-out_str += """
-export const curses: Curse[] =
-"""
-out_str += orjson.dumps(curses).decode()
+def parse_transports(nodes: list) -> dict[str, int]:
+    pattern = re.compile(r"^(\d+) coins per ([\d.]+) miles on (\w+)$")
+    ret = {}
+    rules = parse_rules(nodes)
+    for rule in rules:
+        match = pattern.match(rule)
+        if match:
+            coins = float(match.group(1))
+            distance = float(match.group(2))
+            coins_per_distance = round(coins / distance)
+            mode = match.group(3)
+            ret[mode] = coins_per_distance
+        else:
+            break
+    return ret
 
 
-out_str += """
-export const transports: { [key: string]: number } = {
-	BART: 150,
-	muni: 200,
-	bus: 250,
-	walk: 300,
-};
-"""
+def const_with_type(name: str, type: str, expr: Any):
+    return f"\nexport const {name}: {type} = {orjson.dumps(expr).decode()}\n"
 
-with open("../src/lib/data/out.ts", "w") as f:
-    f.write(out_str)
+
+def main():
+    sections = split_into_sections(walker)
+
+    rules = parse_rules(sections["rules"])
+    # mandatory_challenges = parse_challenges(sections["district specific challenges"])
+    mandatory_challenges = []
+    challenges = parse_challenges(sections["challenges"])
+    curses = parse_curses(sections["curses"])
+    transports = parse_transports(sections["rules"])
+
+    out_str = """
+    import type { Challenge, Curse, MandatoryChallenge } from '$lib/challenge';
+    """
+    out_str += const_with_type("rules", "string[]", rules)
+    out_str += const_with_type("challenges", "Challenge[]", challenges)
+    out_str += const_with_type(
+        "mandatoryChallenges", "MandatoryChallenge[]", mandatory_challenges
+    )
+    out_str += const_with_type("curses", "Curse[]", curses)
+    out_str += const_with_type("transports", "{ [key: string]: number }", transports)
+
+    with open("../src/lib/data/out.ts", "w") as f:
+        f.write(out_str)
+
+
+if __name__ == "__main__":
+    main()

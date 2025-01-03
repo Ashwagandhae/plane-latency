@@ -3,7 +3,6 @@
 	import { payTransportCost, state } from '$lib/state';
 	import Button from '../Button.svelte';
 	import Icon from '../Icon.svelte';
-	import MutNumber from '../Points.svelte';
 
 	let inString = '';
 	let out: number | null = null;
